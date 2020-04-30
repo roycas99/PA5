@@ -51,10 +51,10 @@ public class Product {
 	@Override
 
 	public String toString() {
-		return "Product [name=" + name + ", id=" + id + ", description=" + description + ", price=" + price + "]";
+		return "Product [name=" + name + ", id=" + id + ", description=" + description + ", price=" + price + "]" + "\n";
 	}
 
-	// comaarator interface
+	
 	public static Comparator<Product>CompareById=new Comparator<Product>() {
 
 		@Override
