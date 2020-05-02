@@ -58,6 +58,7 @@ public class ShoppingCartGui extends JFrame {
 				try {
 					ShoppingCartGui frame = new ShoppingCartGui();
 					frame.setVisible(true);
+					
 
 				} catch (Exception e) {
 					e.printStackTrace();

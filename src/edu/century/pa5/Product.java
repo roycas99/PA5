@@ -70,10 +70,8 @@ public class Product {
 
 		@Override
 		public int compare(Product p1, Product p2) {
-			// Product prd1 = (Product) p1;
-			// Product prd2 = (Product) p1;
-			// return prd1.getPrice().compareTo(prd2.getPrice());
-			return (int) (p1.getPrice() - p2.getPrice());
+
+			return Double.compare(p1.price, p2.price);
 		}
 	};
 
