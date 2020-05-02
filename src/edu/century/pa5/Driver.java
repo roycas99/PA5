@@ -10,10 +10,12 @@ public class Driver {
 		ArrayList<Product>productList= new ArrayList<Product>();
 		Product p1= new Product("Iphone", 1, "Electronics", 41.55);
 		Product p2= new Product("HP", 2, "Electronics", 42.22);
-		Product p3= new Product("LG", 0, "Electronics", 43.00);
+		Product p3= new Product("LG", 0, "Electronics", 42.00);
+		Product p4= new Product("Aokia", 3,"Elect",555.5);
 		productList.add(p1);
 		productList.add(p2);
 		productList.add(p3);
+		productList.add(p4);
 		//Collections.sort(productList,Product.CompareByName);
 		Collections.sort(productList,Product.CompareByPrice);
 		for (Product products : productList) {

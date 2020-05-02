@@ -1,3 +1,10 @@
+/*
+ * Program description:this program allow user to choice file,then sorted it based on their id,price,name etc and after that user will save it into new file
+ * Author: your name
+ * Assignment: PA5
+ * Date: May, 01 2020
+ * Class: CSCI 1082 
+ */
 package edu.century.pa5;
 
 import java.awt.*;
@@ -73,7 +80,7 @@ public class ShoppingCartGui extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
-		// setting the textfield
+		// setting the textField
 		fileName = new JTextField();
 		fileName.setBounds(69, 11, 112, 20);
 		contentPane.add(fileName);
@@ -102,7 +109,7 @@ public class ShoppingCartGui extends JFrame {
 		});
 
 		// JCOmbox setting up
-		select = new JComboBox(new String[] { "ID", "PRICE", "NAME", "DESCRIPTION" });
+		select = new JComboBox<String>(new String[] { "ID", "NAME", "DESCRIPTION", "PRICE" });
 		select.setBounds(291, 11, 98, 20);
 		contentPane.add(select);
 
@@ -118,6 +125,7 @@ public class ShoppingCartGui extends JFrame {
 					productList.sort(Product.CompareById);
 				} else if (select.getSelectedItem().equals("PRICE")) {
 					productList.sort(Product.CompareByPrice);
+
 				} else if (select.getSelectedItem().equals("NAME")) {
 					productList.sort(Product.CompareByName);
 				} else if (select.getSelectedItem().equals("DESCRIPTION")) {
@@ -128,21 +136,20 @@ public class ShoppingCartGui extends JFrame {
 
 				}
 				sortArea.setText(sortProduct);
-				custOutput = createFile("C:\\Users\\abshi\\Desktop\\wow\\PA5\\sortedProducts.csv");
-				
+				custOutput = createFile("sortedProducts.csv");
+
 				for (Product items : productList) {
 					createCustomers(items, custOutput);
-					
 
 				}
 				custOutput.flush();
-custOutput.close();
-			}	
+				custOutput.close();
+			}
 
 			private PrintWriter createFile(String filePath) {
 				try {
 					FileWriter productList = new FileWriter(filePath);
-					BufferedWriter bw= new BufferedWriter(productList);
+					BufferedWriter bw = new BufferedWriter(productList);
 					PrintWriter infoToWrite = new PrintWriter(bw);
 					return infoToWrite;
 				} catch (Exception e) {
@@ -154,8 +161,8 @@ custOutput.close();
 
 			private void createCustomers(Product items, PrintWriter custOutput) {
 
-				String info = items.getName()+ "," + items.getDescription()+ "," ;
-				info += Integer.toString(items.getId())+ ","  + Double.toString(items.getPrice()) + "\n";
+				String info = items.getName() + "," + items.getDescription() + ",";
+				info += Integer.toString(items.getId()) + "," + Double.toString(items.getPrice()) + "\n";
 				custOutput.println(info);
 
 			}
@@ -165,22 +172,22 @@ custOutput.close();
 		originalPanel = new JPanel();
 		originalPanel.setBorder(
 				new TitledBorder(null, "Original", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
-		originalPanel.setBounds(10, 64, 500, 600);
+		originalPanel.setBounds(10, 64, 590, 600);
 		contentPane.add(originalPanel);
 		originalPanel.setLayout(null);
 		// Original Text Area
 		originalArea = new JTextArea();
-		originalArea.setBounds(10, 21, 500, 600);
+		originalArea.setBounds(10, 21, 590, 600);
 		originalPanel.add(originalArea);
 		// Panel for Sort
 		sortPanel = new JPanel();
 		sortPanel.setBorder(new TitledBorder(null, "Sorted", TitledBorder.LEADING, TitledBorder.TOP, null, Color.RED));
-		sortPanel.setBounds(540, 64, 500, 600);
+		sortPanel.setBounds(640, 64, 600, 600);
 		contentPane.add(sortPanel);
 		sortPanel.setLayout(null);
 		// Sort Text Area
 		sortArea = new JTextArea();
-		sortArea.setBounds(10, 22, 500, 600);
+		sortArea.setBounds(10, 22, 600, 600);
 		sortPanel.add(sortArea);
 		// this will prevent to edit or Modify
 		originalArea.setEditable(false);
