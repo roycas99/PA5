@@ -1,6 +1,7 @@
 package edu.century.pa5;
 
 import java.awt.*;
+import java.io.*;
 
 import java.awt.EventQueue;
 
@@ -19,6 +20,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -38,6 +40,7 @@ public class ShoppingCartGui extends JFrame {
 	private JComboBox<String> select;
 	private JTextField fileName;
 	private ArrayList<Product> productList = new ArrayList<Product>();
+	private PrintWriter custOutput;
 
 	/**
 	 * Launch the application.
@@ -48,11 +51,13 @@ public class ShoppingCartGui extends JFrame {
 				try {
 					ShoppingCartGui frame = new ShoppingCartGui();
 					frame.setVisible(true);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 
 				}
 			}
+
 		});
 	} // the end of Main Function
 
@@ -120,8 +125,39 @@ public class ShoppingCartGui extends JFrame {
 				}
 				for (Product items : productList) {
 					sortProduct += items.toString() + "";
+
 				}
 				sortArea.setText(sortProduct);
+				custOutput = createFile("C:\\Users\\abshi\\Desktop\\wow\\PA5\\sortedProducts.csv");
+				
+				for (Product items : productList) {
+					createCustomers(items, custOutput);
+					
+
+				}
+				custOutput.flush();
+custOutput.close();
+			}	
+
+			private PrintWriter createFile(String filePath) {
+				try {
+					FileWriter productList = new FileWriter(filePath);
+					BufferedWriter bw= new BufferedWriter(productList);
+					PrintWriter infoToWrite = new PrintWriter(bw);
+					return infoToWrite;
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.exit(0);
+				}
+				return null;
+			}
+
+			private void createCustomers(Product items, PrintWriter custOutput) {
+
+				String info = items.getName()+ "," + items.getDescription()+ "," ;
+				info += Integer.toString(items.getId())+ ","  + Double.toString(items.getPrice()) + "\n";
+				custOutput.println(info);
+
 			}
 		});
 
